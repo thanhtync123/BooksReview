@@ -12,9 +12,21 @@ class BookController extends Controller
      */
     public function index(Request $rq)
     {
-        dd($rq->all());
-        $books=Book::orderBy('updated_at','desc')->WithReviewCount()->WithAvgRating()->get();
-        return view('books.index',compact('books'));
+        $title = $rq->input('txb_search');
+        $filter = $rq->input('filter', '');
+        $books = Book::when($title, fn($query, $title) => $query->title($title));
+        $books = match ($filter) {
+            'popular' => $books->popular(),
+            'popular_last_month' => $books->popularLastMonth(),
+            'popular_6_months_ago' => $books->PopularLast6Months(),
+            'highest_review_last_month' => $books->highestRatedLastMonth(),
+            'highest_review_6_months_ago' => $books->highestRatedLast6Months(),
+            default => $books,
+        };
+        $books = $books
+            ->withAvgRating()
+            ->withReviewCount()->get();
+        return view('books.index', compact('books'));
     }
 
     public function create()
@@ -35,8 +47,8 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $book=Book::orderBy('updated_at','desc')->WithReviewCount()->WithAvgRating()->FindOrFail($id);
-        return view('books.show',compact('book'));
+        $book = Book::orderBy('updated_at', 'desc')->WithReviewCount()->WithAvgRating()->FindOrFail($id);
+        return view('books.show', compact('book'));
     }
 
     /**

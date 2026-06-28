@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Book;
+use App\Models\Review;
 class ReviewController extends Controller
 {
     /**
@@ -17,17 +18,26 @@ class ReviewController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Book $book)
     {
-        //
+
+        return view("reviews.create", compact('book'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Book $book)
     {
-        //
+
+        $review = Review::create([
+            'review' => $request->review,
+            'rating' => $request->rating,
+            'book_id' => $book->id,
+        ]);
+
+        return redirect()->route('books.show', $book->id)
+            ->with('success', 'Thêm đánh giá thành công');
     }
 
     /**

@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<a href="{{ route('books.reviews.create',$book) }}"><button>Thêm review</button></a>
+@if(session('success'))
+        {{ session('success') }}
+@endif
 <div class="max-w-3xl mx-auto p-6 space-y-6">
-
     <div class="bg-white rounded-lg shadow p-6">
         <h1 class="text-3xl font-bold">{{ $book->title }}</h1>
         <p class="text-gray-600">Tác giả: {{ $book->author }}</p>
