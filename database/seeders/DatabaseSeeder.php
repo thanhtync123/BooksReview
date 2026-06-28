@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Book::factory()->count(30)->create()->each(function ($book) {
-        $numReviews = random_int(5, 30);
-        Review::factory()->count($numReviews)->for($book)->create();
-    });
+            Book::factory()->count(30)->create()->each(function ($book) {
+            $numReviews = random_int(5, 30);
+            Review::factory()->count($numReviews)->for($book)->create();
+
+
+        });
 
         User::factory()->create([
             'name' => 'Test User',

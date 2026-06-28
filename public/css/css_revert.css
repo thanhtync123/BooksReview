@@ -1,0 +1,55 @@
+ h1 {
+    font-size: 30em;
+    font-weight: bold;
+    margin: 0.67em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.83em 0;
+}
+
+h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+p {
+    margin: 1em 0;
+}
+
+a {
+    color: blue;
+    text-decoration: underline;
+}
+
+ul {
+    list-style: disc;
+    margin-left: 40px;
+}
+
+ol {
+    list-style: decimal;
+    margin-left: 40px;
+}
+
+button {
+    padding: 2px 6px;
+    border: 1px solid #767676;
+    background: #efefef;
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    border: 1px solid #767676;
+    padding: 2px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 2px;
+} 
+ 
