@@ -12,7 +12,7 @@ Route::get('/seed', function () {
     Artisan::call('db:seed --force');
     return 'Seed done';
 });
-
+// mới nhất nè
 Route::get('/', function () {
 return redirect()->route('books.index');
 });
