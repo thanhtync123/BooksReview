@@ -40,6 +40,7 @@
                     </form>
                     Xin chào {{ auth()->user()->name }}
                    <p><a href="{{ route('reviews.my') }}">Các đánh giá của tôi</a></p> 
+                   <p><a href="{{ route('admin.books.index') }}">Trang quản trị</a></p>
                 </span>
             </div>
         </div>
