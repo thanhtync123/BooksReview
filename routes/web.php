@@ -7,12 +7,10 @@ use App\Http\Controllers\BookController;
 
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/seed', function () {
-    Artisan::call('migrate --force');
-    // Artisan::call('db:seed --force');
-    return 'Seed done';
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+    return Artisan::output();
 });
-
 
 Route::get('/', function () {
     return redirect()->route('books.index');
