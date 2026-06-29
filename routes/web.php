@@ -18,13 +18,18 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('books', BookController::class)->only(['index', 'show']);
+    Route::resource('books', BookController::class);
 
     Route::resource('books.reviews', ReviewController::class)
         ->only(['create', 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
+
+    Route::get('/my-reviews', [ReviewController::class, 'myReviews'])
+        ->name('reviews.my');
+    Route::delete('/my-reviews/{id}', [ReviewController::class, 'deleteMyReviews'])
+        ->name('reviews.deleteMyReviews');
 });
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

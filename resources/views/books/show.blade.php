@@ -18,7 +18,10 @@
         </div>
     </div>
 @forelse ($book->reviews->sortByDesc('created_at') as $item)
+ 
         <div class="bg-white rounded-lg shadow p-5 space-y-2">
+            <b>{{ $item->user->name }} </b>đã đánh giá: <br>
+
             <x-star-rating :rating="$item->rating" />
 
             <p>{{ $item->review }}</p>

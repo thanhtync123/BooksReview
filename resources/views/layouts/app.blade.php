@@ -39,6 +39,7 @@
                         <button type="submit">Đăng xuất</button>
                     </form>
                     Xin chào {{ auth()->user()->name }}
+                   <p><a href="{{ route('reviews.my') }}">Các đánh giá của tôi</a></p> 
                 </span>
             </div>
         </div>

@@ -47,7 +47,11 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $book = Book::orderBy('updated_at', 'desc')->WithReviewCount()->WithAvgRating()->FindOrFail($id);
+        $book = Book::with(['reviews.user'])
+        ->orderBy('updated_at', 'desc')
+        ->withReviewCount()
+        ->withAvgRating()
+        ->findOrFail($id);
         return view('books.show', compact('book'));
     }
 

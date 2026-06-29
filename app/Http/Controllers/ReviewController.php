@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
+
 class ReviewController extends Controller
 {
     /**
@@ -34,6 +36,7 @@ class ReviewController extends Controller
             'review' => $request->review,
             'rating' => $request->rating,
             'book_id' => $book->id,
+            'user_id' =>  Auth::id()
         ]);
 
         return redirect()->route('books.show', $book->id)
@@ -70,5 +73,18 @@ class ReviewController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function myReviews()
+    {
+        $reviews = Review::with('book')->where('user_id', Auth::id())->latest()
+            ->get();
+        return view('reviews.my_review', compact('reviews'));
+    }
+    public function deleteMyReviews($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return redirect()->route('reviews.my')
+            ->with('success', 'Xóa thành công');
     }
 }
