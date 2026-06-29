@@ -38,6 +38,7 @@
                     <form action="/logout" method="POST">@csrf
                         <button type="submit">Đăng xuất</button>
                     </form>
+                    Xin chào {{ auth()->user()->name }}
                 </span>
             </div>
         </div>

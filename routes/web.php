@@ -12,16 +12,23 @@ use App\Http\Controllers\BookController;
 //     return 'Seed done';
 // });
 
+
 Route::get('/', function () {
-return redirect()->route('books.index');
+    return redirect()->route('books.index');
 });
 
-Route::resource('books', BookController::class)->only(['index', 'show']);
-Route::resource('books.reviews', ReviewController::class)->only(['create', 'store']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('books', BookController::class)->only(['index', 'show']);
+
+    Route::resource('books.reviews', ReviewController::class)
+        ->only(['create', 'store']);
+
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
+});
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout',[AuthController::class, 'logout']);
+Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 
-Route::get('/register',[AuthController::class, 'showRegister'])->name('showRegister');
-Route::post('/register',[AuthController::class, 'store'])->name('register.store');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'store'])->name('register.store');
