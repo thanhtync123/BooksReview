@@ -3,9 +3,6 @@
     Sách
 @endsection
 @section('content')
-@if (session('success'))
-    <p>{{ (session('success')) }}</p>
-@endif
 <a href="{{ route('admin.books.create') }}">Thêm</a>
 <table>
     <thead>
@@ -23,7 +20,7 @@
             <td>{{$item->title}}</td>
             <td>{{$item->author}}</td>
             <td>
-                <a href="{{ route('admin.books.edit',$item->id) }}">Sửa</a>
+                <a href="{{ route('admin.books.edit',$item->id) }}"><button>Sửa</button></a>
                     <form action="{{ route('admin.books.destroy',$item->id) }}" method="post">
                             @csrf
                             <button type="submit">Xóa</button>

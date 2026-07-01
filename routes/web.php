@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
         ->as('admin.')
         ->group(function () {
             Route::resource('books', Admin_BookController::class);
+            Route::resource('users', Admin_BookController::class);
         });
 });
 
